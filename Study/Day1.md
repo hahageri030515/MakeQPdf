@@ -49,10 +49,10 @@ venv라는 가상환경 = 폴더를 만들어 헷갈리지 않게함.
 uvicorn를 실행하면 자꾸 재시작되는 게 있었는데
 `uvicorn main:app --reload`
 라는 코드가 뭔가 수정되면 서버 재시작, 즉 뭔가 수정했을 때 계속
-수동으로 서버 재시작은 번거로우니까 만든거 같은데 암튼, app이라는 폴더를 만들어주고
-app이라는 폴더의 수정사항이 있을 경우에만 재시작 되도록 지정해주었다.[main.py]가 포함되어 있음.
+수동으로 서버 재시작은 번거로우니까 만든거 같은데 암튼, backend이라는 폴더를 만들어주고
+backend이라는 폴더의 수정사항이 있을 경우에만 재시작 되도록 지정해주었다.[main.py]가 포함되어 있음.
 
-`uvicorn app.main:app --reload --reload-dir app`
+`uvicorn backend.main:app --reload --reload-dir app`
 
 아 그리고 재밋는게
 http://127.0.0.1:8000
@@ -60,4 +60,17 @@ http://127.0.0.1:8000
 진짜 내가 만든 거구나 싶다~
 
 
+### .toml파일에 대해 조금 공부.
 
+```
+[tool.fastapi]
+entrypoint = "backend.main:app"
+```
+이게 무슨 용도이지 봤는데.
+`backend.main:app` 이라고 하면,
+backend 폴더 안에, main.py 안에 app이라는 클래스이자 객체(인스턴스)를 '지정'하게됨.
+
+`from backend.main import app`
+얘도 똑같은 뜻임
+
+결국, app이라는 객체를 찾을 때 더 편하게 찾으라고 써놓는 느낌임.
