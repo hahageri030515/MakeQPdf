@@ -53,7 +53,7 @@ uvicorn를 실행하면 자꾸 재시작되는 게 있었는데
 수동으로 서버 재시작은 번거로우니까 만든거 같은데 암튼, backend이라는 폴더를 만들어주고
 backend이라는 폴더의 수정사항이 있을 경우에만 재시작 되도록 지정해주었다.[main.py]가 포함되어 있음.
 
-`uvicorn backend.main:app --reload --reload-dir app`
+`uvicorn backend.main:app --reload --reload-dir backend`
 
 아 그리고 재밋는게
 http://127.0.0.1:8000
