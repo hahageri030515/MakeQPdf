@@ -1,7 +1,41 @@
-<img width="1624" height="1096" alt="image" src="https://github.com/user-attachments/assets/4cbd7e1d-5a4a-4d0f-af28-bfb84a9f0285" /># Day7
+# Day7
 
 pdfplumber는 딱봐도 오류가 많을 것 같다.
 왜냐면 전에 pdf 번역기 돌렸을 때 항상 글자 인식 오류가 있었기도하고,
 컴퓨터 입장에서의 글자는 우리와 같이 의미를 보고 인식하지 않기 때문.
 
 <img width="1624" height="1096" alt="image" src="https://github.com/user-attachments/assets/d5770184-86be-40f0-afc1-a8d6d9897261" />
+
+이 사진은 운영체제 pdf인데, 테스트용으로 가져왔다.
+단순히 위에서 부터 읽어서,
+Basic HW Components
+I/O
+Processor
+Modules
+System
+Main
+Bus
+Memory
+5
+2/19/2021
+이런 값이 출력되었다. 명백한 오류.
+어떻게 해결하면 좋을까. 내 생각은 바로 아래에 글자가 있으면 그거부터 읽기?
+AI의 해답은 사뭇 다르다.
+1. 사각형을 의미 단위로 인식하기.
+2. 일단 이대로 입력 받고 AI한테 배치가 다를 수도 있으니 알아서 해석해달라고 하는 것.
+
+2번이 확실히 편해 보이긴하다.
+
+음 근데 생각해보니 텍스트만 받아와서는 제대로된 인식에 문제가 있을 것 같아서
+이미지 추출하는 것도 고려중.
+
+pdf2image라는 게 있다.
+근데 이미지를 받아온 뒤에 이미지로 텍스트분석을 하면 정확도가 더 떨어진다고 해서,
+
+최종 계획은 pdf텍스트를 pdfplumber로 추출하고, 페이지를 이미지로 변환하고,
+텍스트와 이미지를 동시에 보내서 문제를 만들어 달라고 하는 것이다.
+
+음,,
+그럼 다 됐고 다음 단계로 가보자.
+
+
