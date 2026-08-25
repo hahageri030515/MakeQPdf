@@ -10,3 +10,33 @@
 
 React를 해야되는 데, 자바 스크립트에 대해 공부해야 될 듯하다.
 파이팅.
+
+기본 설정하는데 살짝 애 먹었다..
+
+음 일단 가장 기본이 되는 글자 띄우기와 버튼 생성을 배웠다.
+```
+function MyButton() {
+  return (
+    <button>I'm a button</button>
+  );
+}
+
+export default function MyApp() {
+  return (
+    <div>
+      <h1>Welcome to my app</h1>
+      <MyButton />
+    </div>
+  );
+}
+```
+글자는 <button>, <h1> 사이를 바꿔서 고칠 수 있고,
+함수 형태로 해서 선언된다.
+결과를 보면 위에서 아래로 읽히는듯.
+return값을 ()로 묶어서 그 안에 넣고 싶은 컴포넌트를 넣는 느낌이다.
+; <- 이거 주의.
+
+export default라는 게 좀 흥미로운 점이 많다.
+한 파일에서 하나만 가능하고, 가져올 때 아무 이름이나 상관x.
+그리고 export만 있어도 일단 다른 파일에서 접근 가능.
+그리고, 가장 중요한게 이 함수에서 다 실행되는 거라 없으면 아무것도 안나옴!!
