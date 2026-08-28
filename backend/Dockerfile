@@ -1,12 +1,16 @@
 FROM python:3.12-slim
 
 # weasyprint 실행에 필요한 시스템 라이브러리 설치
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    python3-dev \
+    libffi-dev \
+    shared-mime-info \
+    libcairo2 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libgdk-pixbuf2.0-0 \
-    libffi-dev \
-    libcairo2 \
+    libglib2.0-0 \
     poppler-utils \
     && rm -rf /var/lib/apt/lists/*
 
