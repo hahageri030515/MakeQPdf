@@ -45,7 +45,7 @@ export default function PdfUploader() {
     formData.append("difficulty", difficulty)
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/files/", {
+      const response = await fetch("https://makeqpdfbackend.onrender.com/files/", {
         method: "POST",
         body: formData,
       });
