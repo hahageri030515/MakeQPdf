@@ -119,7 +119,7 @@ def html_style(html_content): #html 양식 디자인
     style = f"""
 <style>
   body {{
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'Noto Sans CJK KR', 'Noto Sans KR', sans-serif;
     color: {theme['text_color']};
     line-height: 1.6;
     padding: 40px;
