@@ -89,55 +89,117 @@ export default function PdfUploader() {
 
 //ui 꾸미는 곳
   return (
-    <div style={{ position: 'relative', padding: '20px' }}>
-      <h1>KOBI</h1>
-      <h4>~문제집 생성기~</h4>
-
-      <input type="file" accept=".pdf" multiple ref={fileInputRef}
-      onChange={handleFileChange} style={{ display: 'none' }} />
-
-      <button onClick={triggerFileSelect} style={{ position: 'absolute',
-          top: '200px',
-          left: '150px'}}>
-        📁 PDF 파일 선택
-      </button>
-
-      {file.length > 0 && ( //파일 선택 관련
-        <ul style={{ fontSize: '14px', marginTop: '8px',
-          listStyle: 'none',  // 불릿 포인트 제거
-          paddingLeft: 0,       // 왼쪽 여백도 같이 제거 (안 하면 빈 공간만 남음),
-          position: 'absolute',
-          top: '225px',        // input 아래쯤 고정 위치
-          left: '170px'
-         }}>
-          {file.map((f, i) => (
-            <li key={i}>{f.name}</li>
-          ))}
-        </ul>
-      )}
-
-      <div style={{  position: 'absolute',
-          top: '395px',     
-          left: '430px'}}> 
-        <label>
-          문제 개수: <strong>{numQuestions}개</strong>
-        </label>
-        <input
-          type="range"
-          min={3}
-          max={30}
-          value={numQuestions}
-          onChange={(e) => setNumQuestions(Number(e.target.value))}
-          style={{ width: '90%' }}
-        />
-        
+    <div style={{ 
+      maxWidth: '500px', 
+      margin: '0 auto', 
+      padding: '20px',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '20px'
+    }}>
+      <div>
+        <h1 style={{ margin: '5px 0 0' }}>KOBI</h1>
+        <h4 style={{ margin: '20px 0 0' }}>~문제집 생성기~</h4>
       </div>
 
-      <div style={{ position: 'absolute',
-          top: '270px',     
-          left: '460px' }}>
-        <label style={{ fontSize: '14px', fontWeight: 'bold' }}>난이도</label>
-        <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+      {/* 파일 선택 */}
+      <div>
+        <input 
+          type="file" 
+          accept=".pdf" 
+          multiple 
+          ref={fileInputRef}
+          onChange={handleFileChange} 
+          style={{ display: 'none' }} 
+        />
+        <button onClick={triggerFileSelect}>
+          📁 PDF 파일 선택
+        </button>
+
+        {file.length > 0 && (
+          <div style={{
+            height: '120px',
+            width: '100%',
+            overflowY: 'auto',
+            border: '1px solid #eee',
+            borderRadius: '6px',
+            padding: '8px 12px',
+            marginTop: '8px',
+            boxSizing: 'border-box'
+          }}>
+            <ul style={{ 
+              fontSize: '14px', 
+              margin: 0,
+              listStyle: 'none',
+              paddingLeft: 0
+            }}>
+              {file.map((f, i) => (
+                <li key={i} style={{
+                  whiteSpace: 'nowrap',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis'
+                }}>
+                  {f.name}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      {/* 실전/일반 모드 스위치 */}
+      <div 
+        onClick={() => setExamMode(!examMode)}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          cursor: 'pointer',
+          userSelect: 'none',
+          flexWrap: 'wrap',
+          gap: '10px'
+        }}
+      >
+        <span style={{ 
+          color: !examMode ? '#8B6F47' : '#aaa',
+          fontWeight: !examMode ? 'bold' : 'normal'
+        }}>
+          📖 일반 학습 모드
+        </span>
+
+        <div style={{
+          width: '50px',
+          height: '26px',
+          borderRadius: '13px',
+          backgroundColor: examMode ? '#8B6F47' : '#ccc',
+          position: 'relative',
+          transition: 'background-color 0.2s',
+          flexShrink: 0
+        }}>
+          <div style={{
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            backgroundColor: 'white',
+            position: 'absolute',
+            top: '3px',
+            left: examMode ? '27px' : '3px',
+            transition: 'left 0.2s',
+            boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
+          }} />
+        </div>
+
+        <span style={{ 
+          color: examMode ? '#8B6F47' : '#aaa',
+          fontWeight: examMode ? 'bold' : 'normal'
+        }}>
+          ⏱ 실전 모의고사 모드
+        </span>
+      </div>
+
+      {/* 난이도 */}
+      <div>
+        <label style={{ fontSize: '14px', fontWeight: 'bold', display: 'block', textAlign: 'center' }}>난이도</label>
+        <div style={{ display: 'flex', gap: '8px', marginTop: '8px', justifyContent: 'center' }}>
           {["하", "중", "상"].map((level) => (
             <button
               key={level}
@@ -158,20 +220,36 @@ export default function PdfUploader() {
         </div>
       </div>
 
-      <button onClick={handleUpload} disabled={isLoading} style={{ position: 'absolute', //생성 버튼
-        bottom: '-100px', right: '150px' }}>
-        {isLoading ? "문제집 생성 중..." : "문제집 생성하기"}
-        
-      </button>
+      {/* 문제 개수 슬라이더 */}
+      <div>
+        <label>
+          문제 개수: <strong>{numQuestions}개</strong>
+        </label>
+        <input
+          type="range"
+          min={3}
+          max={30}
+          value={numQuestions}
+          onChange={(e) => setNumQuestions(Number(e.target.value))}
+          style={{ width: '100%' }}
+        />
+      </div>
 
-      <img style={{ position: 'absolute', bottom: '-85px', right: '165px', width: '7%'}} //코비 사진.
+      {/* 생성 버튼 + 코비 */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '12px',  justifyContent: 'center' }}>
+        <button onClick={handleUpload} disabled={isLoading}>
+          {isLoading ? "문제집 생성 중..." : "문제집 생성하기"}
+        </button>
+        <img 
+          src={kobi_2} 
+          alt="" 
+          style={{ width: '50px', height: 'auto' }} 
+        />
+      </div>
 
-      src={kobi_2}
-
-      alt="" />
-
+      {/* 다운로드 버튼 */}
       {downloadUrl && (
-        <div style={{ position: 'absolute', bottom: '-300px', right: '100px' }}>
+        <div>
           <a href={downloadUrl} download={downloadFilename}>
             <button style={{
               padding: '16px 32px',
@@ -181,70 +259,14 @@ export default function PdfUploader() {
               border: 'none',
               backgroundColor: '#8B6F47',
               color: 'white',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              width: '100%'
             }}>
-            📄 PDF 다운로드</button>
+              📄 PDF 다운로드
+            </button>
           </a>
-          
         </div>
       )}
-      
-
-      <div style={{  position: 'absolute',
-          top: '200px',        // input 아래쯤 고정 위치
-          left: '360px', }}>
-      <div 
-        onClick={() => setExamMode(!examMode)}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          marginTop: '8px',
-          cursor: 'pointer',
-          userSelect: 'none'
-        }}
-      >
-        <span style={{ 
-          marginRight: '10px', 
-          color: !examMode ? '#8B6F47' : '#aaa',
-          fontWeight: !examMode ? 'bold' : 'normal'
-        }}>
-          📖 일반 학습 모드
-        </span>
-
-        {/* 스위치 몸체 */}
-        <div style={{
-          width: '50px',
-          height: '26px',
-          borderRadius: '13px',
-          backgroundColor: examMode ? '#8B6F47' : '#ccc',
-          position: 'relative',
-          transition: 'background-color 0.2s'
-        }}>
-          {/* 동그란 손잡이 */}
-          <div style={{
-            width: '20px',
-            height: '20px',
-            borderRadius: '50%',
-            backgroundColor: 'white',
-            position: 'absolute',
-            top: '3px',
-            left: examMode ? '27px' : '3px',
-            transition: 'left 0.2s',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.3)'
-          }} />
-        </div>
-
-        <span style={{ 
-          marginLeft: '10px', 
-          color: examMode ? '#8B6F47' : '#aaa',
-          fontWeight: examMode ? 'bold' : 'normal'
-        }}>
-          ⏱ 실전 모의고사 모드
-        </span>
-      </div>
     </div>
-
-    </div>
-    
   );
 }
