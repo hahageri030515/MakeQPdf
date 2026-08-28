@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from pdf2image import convert_from_bytes
 from pathlib import Path
 
-from backend.ai import make_problem
+from ai import make_problem
 
 from weasyprint import HTML
 from typing import List
