@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from pdf2image import convert_from_bytes
 from pathlib import Path
 
-from backend.ai import make_problem
+from ai import make_problem
 
 from weasyprint import HTML
 from typing import List
@@ -26,7 +26,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # React 개발 서버 주소
+    allow_origins=["http://localhost:5173", "https://kobiquiz.vercel.app"],  # React 개발 서버 주소
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
