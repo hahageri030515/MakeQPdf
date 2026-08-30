@@ -6,7 +6,7 @@
 입력창이 뜨면 입력했었는데 여기는 특이하게
 '주소창'에 있는 값을 받아오게 되어있다.
 
-
+```
 from fastapi import FastAPI
 
 app = FastAPI()
