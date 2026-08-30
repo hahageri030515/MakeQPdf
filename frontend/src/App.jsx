@@ -168,7 +168,7 @@ function handleDownloadClick() {
         onClick={() => {
           setExamMode(!examMode);
           setShowModeTip(true);
-          setTimeout(() => setShowModeTip(false), 10000);
+          setTimeout(() => setShowModeTip(false), 15000);
         }}
         style={{
           display: 'flex',
