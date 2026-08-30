@@ -13,6 +13,7 @@ export default function PdfUploader() {
   const [examMode, setExamMode] = useState(false);
   const [difficulty, setDifficulty] = useState("중");
   const [showModeTip, setShowModeTip] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
 
 
   function handleFileChange(e) {
@@ -35,12 +36,12 @@ export default function PdfUploader() {
   }
 
   async function handleUpload() {
-    if (!file) {
-      alert("PDF 파일을 먼저 선택해 주세요.");
-
-      return;
-    }
-
+    if (file.length === 0) {
+      setErrorMessage("PDF 파일을 1개 이상 추가해줘!");
+      setTimeout(() => setErrorMessage(null), 3000);
+    return;
+  }
+    setErrorMessage(null);
     setIsLoading(true);
 
     const formData = new FormData();
@@ -167,7 +168,7 @@ function handleDownloadClick() {
         onClick={() => {
           setExamMode(!examMode);
           setShowModeTip(true);
-          setTimeout(() => setShowModeTip(false), 3000);
+          setTimeout(() => setShowModeTip(false), 10000);
         }}
         style={{
           display: 'flex',
@@ -296,6 +297,19 @@ function handleDownloadClick() {
       웹 링크를 복사해서 <strong>Chrome</strong>에서 실행해줘.
       </div>
     )}
+    {errorMessage && (
+    <div style={{
+      padding: '10px 14px',
+      backgroundColor: '#FFF0F0',
+      border: '1px solid #E5A5A5',
+      borderRadius: '10px',
+      fontSize: '13px',
+      color: '#8B3A3A'
+    }}>
+      🦉 {errorMessage}
+    </div>
+    )}
+
 
       {/* 다운로드 버튼 */}
       {downloadUrl && (
