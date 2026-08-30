@@ -32,6 +32,7 @@ export default function PdfUploader() {
   async function handleUpload() {
     if (!file) {
       alert("PDF 파일을 먼저 선택해 주세요.");
+
       return;
     }
 
@@ -72,12 +73,11 @@ export default function PdfUploader() {
         }
       }
 
-      setDownloadFilename(filename);
-
       /*url관련.*/
       const blob = await response.blob(); // JSON 대신 blob(파일 데이터)로 받기
       const url = URL.createObjectURL(blob);
       setDownloadUrl(url);
+      setDownloadFilename(filename);
 
     } catch (error) {
       console.error("전송 실패:", error);
@@ -86,6 +86,15 @@ export default function PdfUploader() {
       setIsLoading(false);
     }
   }
+
+function handleDownloadClick() {
+  const link = document.createElement('a');
+  link.href = downloadUrl;
+  link.download = downloadFilename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 //ui 꾸미는 곳
   return (
@@ -113,7 +122,7 @@ export default function PdfUploader() {
           style={{ display: 'none' }} 
         />
         <button onClick={triggerFileSelect}>
-          📁 PDF 파일 선택
+          📁 PDF 파일 추가
         </button>
 
         {file.length > 0 && (
@@ -249,23 +258,19 @@ export default function PdfUploader() {
 
       {/* 다운로드 버튼 */}
       {downloadUrl && (
-        <div>
-          <a href={downloadUrl} download={downloadFilename}>
-            <button style={{
-              padding: '16px 32px',
-              fontSize: '20px',
-              fontWeight: 'bold',
-              borderRadius: '10px',
-              border: 'none',
-              backgroundColor: '#8B6F47',
-              color: 'white',
-              cursor: 'pointer',
-              width: '100%'
-            }}>
-              📄 PDF 다운로드
-            </button>
-          </a>
-        </div>
+        <button onClick={handleDownloadClick} style={{
+          padding: '16px 32px',
+          fontSize: '20px',
+          fontWeight: 'bold',
+          borderRadius: '10px',
+          border: 'none',
+          backgroundColor: '#8B6F47',
+          color: 'white',
+          cursor: 'pointer',
+          width: '100%'
+          }}>
+          📄 PDF 다운로드
+        </button>
       )}
     </div>
   );
