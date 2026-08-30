@@ -12,7 +12,7 @@ export default function PdfUploader() {
   const [downloadFilename, setDownloadFilename] = useState("문제집.pdf");
   const [examMode, setExamMode] = useState(false);
   const [difficulty, setDifficulty] = useState("중");
-
+  const [showModeTip, setShowModeTip] = useState(false);
 
 
   function handleFileChange(e) {
@@ -162,8 +162,13 @@ function handleDownloadClick() {
       </div>
 
       {/* 실전/일반 모드 스위치 */}
+    <div style={{ position: 'relative' }}>
       <div 
-        onClick={() => setExamMode(!examMode)}
+        onClick={() => {
+          setExamMode(!examMode);
+          setShowModeTip(true);
+          setTimeout(() => setShowModeTip(false), 3000);
+        }}
         style={{
           display: 'flex',
           alignItems: 'center',
@@ -209,6 +214,23 @@ function handleDownloadClick() {
           ⏱ 실전 모의고사 모드
         </span>
       </div>
+       {showModeTip && (
+    <div style={{
+      marginTop: '8px',
+      padding: '10px 14px',
+      backgroundColor: '#FDFBF7',
+      border: '1px solid #D4A574',
+      borderRadius: '10px',
+      fontSize: '13px',
+      color: '#4A3F35',
+      position: 'relative'
+    }}>
+      🦉 {examMode 
+        ? "실전 모의고사 모드는 문제를 먼저 다 풀고, 정답과 해설은 맨 뒤에 모아서 보여줘!" 
+        : "일반 학습 모드는 문제 하나 풀고 바로 해설을 확인할 수 있어!"}
+    </div>
+  )}
+</div>
 
       {/* 난이도 */}
       <div>
@@ -271,7 +293,7 @@ function handleDownloadClick() {
           marginBottom: '12px'
         }}>
       🦉 인스타그램/카카오톡 안에서는 PDF 다운로드가 제한될 수 있어! 
-      우측 상단 메뉴(⋮)에서 <strong>"다른 브라우저에서 열기"</strong>를 눌러줘.
+      웹 링크를 복사해서 <strong>Chrome</strong>에서 실행해줘.
       </div>
     )}
 
