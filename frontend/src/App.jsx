@@ -284,6 +284,26 @@ function handleDownloadClick() {
         />
       </div>
 
+      {isLoading && (
+      <div style={{
+        padding: '12px 16px',
+        backgroundColor: '#FDFBF7',
+        border: '1px solid #D4A574',
+        borderRadius: '10px',
+        fontSize: '13px',
+        color: '#4A3F35',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px'
+      }}>
+        <img src={kobi_2} alt="" style={{ width: '30px', height: 'auto', flexShrink: 0 }} />
+        <span>
+          🦉 문제집을 열심히 만들고 있어! 페이지가 많거나 문제 개수가 많으면 
+          시간이 좀 걸릴 수 있으니 조금만 기다려줘.
+        </span>
+      </div>
+    )}
+
       {isInAppBrowser() && (
         <div style={{
           padding: '12px 16px',
