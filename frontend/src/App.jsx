@@ -296,10 +296,10 @@ function handleDownloadClick() {
         alignItems: 'center',
         gap: '10px'
       }}>
-        <img src={kobi_3} alt="" style={{ width: '30px', height: 'auto', flexShrink: 0 }} />
+        <img src={kobi_2} alt="" style={{ width: '30px', height: 'auto', flexShrink: 0 }} />
         <span>
-          🦉 문제집을 열심히 만들고 있어! 페이지가 많거나 문제 개수가 많으면 
-          시간이 좀 걸릴 수 있으니 조금만 기다려줘.
+        🦉 문제집을 열심히 만들고 있어! 오랜만에 접속했다면 서버가 깨어나느라 
+1분 정도 걸릴 수도 있어. 조금만 기다려줘, 곧 완성될 거야!
         </span>
       </div>
     )}
