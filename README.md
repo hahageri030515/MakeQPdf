@@ -12,7 +12,8 @@
 - 결과 PDF 다운로드
 
 ## 데모
-(스크린샷 or GIF — 나중에 완성되면 꼭 넣기, 채용담당자는 코드보다 이거 먼저 봄)
+![Uploading image.png…]()
+
 
 ## 기술 스택
 - Frontend: React / Next.js
