@@ -25,11 +25,6 @@ export default function PdfUploader() {
     fileInputRef.current.click(); // 숨겨진 input을 대신 클릭해줌
   }
 
-  function isInAppBrowser() {
-    const ua = navigator.userAgent || navigator.vendor;
-    return /Instagram|FBAN|FBAV|KAKAOTALK|Line/i.test(ua);
-  }
-
   function handleNumChange(e) {
     const value = Number(e.target.value);
     setNumQuestions(value);
@@ -304,19 +299,19 @@ function handleDownloadClick() {
       </div>
     )}
 
-      {isInAppBrowser() && (
-        <div style={{
-          padding: '12px 16px',
-          backgroundColor: '#FFF3CD',
-          border: '1px solid #E5C158',
-          borderRadius: '10px',
-          fontSize: '13px',
-          marginBottom: '12px'
-        }}>
-      🦉 인스타그램/카카오톡 안에서는 PDF 다운로드가 제한될 수 있어! 
-      웹 링크를 복사해서 <strong>Chrome</strong>에서 실행해줘.
-      </div>
-    )}
+  
+      <div style={{
+        padding: '12px 16px',
+        backgroundColor: '#FFF3CD',
+        border: '1px solid #E5C158',
+        borderRadius: '10px',
+        fontSize: '13px',
+        marginBottom: '12px'
+      }}>
+      🦉 크롬 브라우저 사용을 권장해! PDF 총 페이지 수가 너무 많으면 
+  오류가 발생할 수 있어 (일단 올려봐! 150페이지까진 가능해!)
+    </div>
+
     {errorMessage && (
     <div style={{
       padding: '10px 14px',
