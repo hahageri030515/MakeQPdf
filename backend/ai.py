@@ -67,7 +67,8 @@ response_schema = {
     "required": ["document_info", "quiz_data"]
 }
 
-def make_problem(image, text, num_questions=3, difficulty = "중", exam_mode = False, max_retries=7):
+def make_problem(#image, 
+        text, num_questions=3, difficulty = "중", exam_mode = False, max_retries=7):
 
     base_delay = 2
     print(f"난이도: {difficulty}")
@@ -89,7 +90,8 @@ def make_problem(image, text, num_questions=3, difficulty = "중", exam_mode = F
         try:
             response = client.models.generate_content(
                 model="gemini-3.6-flash",
-                contents=[list(image), f"참고 텍스트:[{text}] 이 이미지와 텍스트를 보고 pdf형식의 예상 문제집을 만들어주면 돼. \
+                contents=[#list(image), 
+                    f"참고 텍스트:[{text}] 이 이미지와 텍스트를 보고 pdf형식의 예상 문제집을 만들어주면 돼. \
                                 난이도는 '{difficulty}' 수준으로 맞춰줘.\
                                   {mode_instruction}\
                                   총 {num_questions}개의 문제를 내줘.\

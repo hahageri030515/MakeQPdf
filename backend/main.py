@@ -2,7 +2,7 @@ from typing import Annotated
 from fastapi import FastAPI, UploadFile, Form
 from fastapi.responses import FileResponse
 
-from pdf2image import convert_from_bytes
+#from pdf2image import convert_from_bytes
 from pathlib import Path
 
 from ai import make_problem
@@ -35,7 +35,7 @@ app.add_middleware(
 
 def make_im_te(contents): #이미지, 텍스트 추출함수
     #이미지 추출
-    images = convert_from_bytes(contents)
+    #images = convert_from_bytes(contents)
     
     # 텍스트 추출
     text_result = ""
@@ -45,7 +45,8 @@ def make_im_te(contents): #이미지, 텍스트 추출함수
             if text:
                 text_result += text + "\n"
 
-    return images, text_result    
+    #return images, text_result
+    return text_result    
 
 def data_title(result): #제목추출
 
@@ -89,7 +90,7 @@ def data_assembly(result, exam_mode = False, time_limit = None): #html 조립.
             circle_chars = "①②③④⑤⑥⑦⑧⑨⑩"
 
             for i, opt in enumerate(page['options']):
-                  # 앞부분의 "1. " "1) " "1." 같은 패턴 제거
+                # 앞부분의 "1. " "1) " "1." 같은 패턴 제거
                 cleaned_opt = re.sub(r'^\d+[\.\)]\s*', '', opt.strip())
                 cleaned_opt = re.sub(f'^[{circle_chars}]\s*', '', cleaned_opt)
                 marker = circle_numbers[i] if i < len(circle_numbers) else f"{i+1})"
@@ -168,16 +169,18 @@ def html_style(html_content): #html 양식 디자인
 
 @app.post("/files/")
 async def create_file(files: List[UploadFile], num_questions: int = Form(3), exam_mode: bool = Form(False), difficulty: str = Form("중")): #메인함수
-    all_images = []
+    #all_images = []
     all_text = ""
 
     for file in files:
         contents = await file.read()
-        images, text_result = make_im_te(contents)
-        all_images.extend(images)  # 이미지 리스트에 계속 추가
+        #images, 
+        text_result = make_im_te(contents)
+        #all_images.extend(images)  # 이미지 리스트에 계속 추가
         all_text += text_result + "\n"  # 텍스트도 이어붙임
 
-    result = make_problem(all_images, all_text, num_questions, difficulty, exam_mode)
+    result = make_problem(#all_images, 
+        all_text, num_questions, difficulty, exam_mode)
 
     time_limit = int(num_questions * 1.5) if exam_mode else None
 
