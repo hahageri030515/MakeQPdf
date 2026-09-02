@@ -303,7 +303,7 @@ function handleDownloadClick() {
       <div style={{
         padding: '12px 16px',
         backgroundColor: '#e4e0d2',
-        border: '1px solid #f4eacd',
+        border: '1px solid #cba944',
         borderRadius: '10px',
         fontSize: '13px',
         marginBottom: '12px'
