@@ -306,7 +306,6 @@ function handleDownloadClick() {
         border: '1px solid #cba944',
         borderRadius: '10px',
         fontSize: '13px',
-        marginBottom: '12px',
         color: '#6B5B1E'   // 폰트 색상 추가
       }}>
       🦉 크롬 브라우저 사용을 권장해! PDF 총 페이지 수가 너무 많으면 
