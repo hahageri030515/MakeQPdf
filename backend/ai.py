@@ -67,7 +67,7 @@ response_schema = {
     "required": ["document_info", "quiz_data"]
 }
 
-def make_problem(image, text, num_questions=3, difficulty = "중", exam_mode = False, max_retries=5):
+def make_problem(image, text, num_questions=3, difficulty = "중", exam_mode = False, max_retries=7):
 
     base_delay = 2
     print(f"난이도: {difficulty}")
@@ -112,10 +112,10 @@ def make_problem(image, text, num_questions=3, difficulty = "중", exam_mode = F
             return response
         except Exception as e:
             if attempt < max_retries - 1:
-                sleep_time = base_delay * (2 ** (attempt + 1))
-                print(f"재시도 중... ({attempt + 1}/{max_retries})")
-                time.sleep(sleep_time)  # 5초 대기 후 재시도
+                sleep_time = min(base_delay * (2 ** attempt), 30)  # 최대 30초로 상한 걸기
+                print(f"재시도 중... ({attempt + 1}/{max_retries}), {sleep_time}초 대기")
+                time.sleep(sleep_time)
             else:
-                raise e  # 마지막 시도까지 실패하면 에러 그대로 던지기
+                raise e
     return response
 

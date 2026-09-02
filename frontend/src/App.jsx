@@ -37,7 +37,7 @@ export default function PdfUploader() {
 
   async function handleUpload() {
     if (file.length === 0) {
-      setErrorMessage("PDF 파일을 1개 이상 추가해줘!");
+      setErrorMessage("PDF 파일을 1개 이상 추가해줘! 총 페이지 수는 25개 이하로 해주면 성공확률이 높아져");
       setTimeout(() => setErrorMessage(null), 3000);
     return;
   }
