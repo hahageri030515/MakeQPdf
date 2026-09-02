@@ -37,7 +37,7 @@ export default function PdfUploader() {
 
   async function handleUpload() {
     if (file.length === 0) {
-      setErrorMessage("PDF 파일을 1개 이상 추가해줘! 총 페이지 수는 25개 이하로 해주면 성공확률이 높아져");
+      setErrorMessage("PDF 파일을 1개 이상 추가해줘!");
       setTimeout(() => setErrorMessage(null), 3000);
     return;
   }
@@ -299,7 +299,7 @@ function handleDownloadClick() {
         <img src={kobi_1} alt="" style={{ width: '30px', height: 'auto', flexShrink: 0 }} />
         <span>
         문제집을 열심히 만들고 있어! 오랜만에 접속했다면 서버가 깨어나느라 
-1분 정도 걸릴 수도 있어. 조금만 기다려줘, 곧 완성될 거야!
+1분 정도 걸릴 수도 있고, 업로드 한 페이지 수가 많으면 그만큼 오래걸릴 수 있어. 조금만 기다려줘, 곧 완성될 거야!
         </span>
       </div>
     )}
