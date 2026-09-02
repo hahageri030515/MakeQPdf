@@ -91,7 +91,11 @@ def make_problem(#image,
             response = client.models.generate_content(
                 model="gemini-3.6-flash",
                 contents=[#list(image), 
-                    f"참고 텍스트:[{text}] 이 이미지와 텍스트를 보고 pdf형식의 예상 문제집을 만들어주면 돼. \
+                    f"참고 텍스트:[{text}] 이 텍스트는 PDF에서 추출한 거라, 레이아웃 특성상 \
+                                문장/단어 순서가 부자연스럽게 섞여 \
+                                있을 수 있어. 그런 경우 문맥을 보고 \
+                                자연스럽게 재구성해서 이해해줘. 이 텍스트를 \
+                                보고 pdf형식의 예상 문제집을 만들어주면 돼.\
                                 난이도는 '{difficulty}' 수준으로 맞춰줘.\
                                   {mode_instruction}\
                                   총 {num_questions}개의 문제를 내줘.\
